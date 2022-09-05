@@ -1,0 +1,5 @@
+readme.html
+*.db
+*.db-journal
+.vscode
+__pycache__

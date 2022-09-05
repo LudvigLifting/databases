@@ -1,0 +1,120 @@
+digraph G {
+	fontname = "Bitstream Vera Sans"
+	fontsize = 10
+	splines=ortho
+
+	node [
+		fontname = "Bitstream Vera Sans"
+		fontsize = 16
+		shape = "record"
+	]
+
+	edge [
+		fontname = "Bitstream Vera Sans"
+		fontsize = 16
+	]
+
+	Pallet [
+		label=<
+		{<b>Pallet</b>
+		|
+		<u>pallet_id</u>
+		<br/>production_datetime
+		<br/>loaded_datetime
+		<br/>delivered_datetime
+		}>
+	]
+
+	Product [
+		label=<
+		{<b>Product</b>
+		|<u>product_name</u>
+		}>
+	]
+
+	Recipe [
+		label=<
+		{&lt;&lt;weak&gt;&gt;<br/>
+		<b>Recipe</b>
+		|
+		recipe_amount
+		}>
+	]
+
+	Customer [
+		label=<
+		{<b>Customer</b>
+		|
+		<u>customer_name</u>
+		<br/>customer_address
+		}>
+	]
+
+	Block [
+		label=<
+		{&lt;&lt;weak&gt;&gt;<br/>
+		<b>Block</b>
+		|
+		<u>from_datetime</u>
+		<br/><u>to_datetime</u>
+		}>
+	]
+
+	Ingredient [
+		label=<
+		{<b>Ingredient</b>
+		|
+		<u>ingredient_name</u>
+		<br/>unit
+		}>
+	]
+
+	IngredientDelivery [
+		label=<
+		{&lt;&lt;weak&gt;&gt;<br/>
+		<b>IngredientDelivery</b>
+		|
+		<u>ingredient_delivery_datetime</u>
+		<br/>ingredient_amount
+		}>
+	]
+
+	Order [
+		label=<
+		{<b>Order</b>
+		|
+		<u>order_id</u>
+		<br/>order_datetime
+		}>
+	]
+
+	OrderItem [
+		label=<
+		{&lt;&lt;weak&gt;&gt;<br/>
+		<b>OrderItem</b>
+		|
+		order_amount
+		}>
+	]
+
+	edge [ 
+		arrowhead = "none"
+		headlabel = "*"
+		taillabel = "1"
+	]
+	Product -> Pallet
+	Product -> OrderItem
+	Product -> Block
+	Ingredient -> IngredientDelivery
+	Customer -> Order
+	Order -> OrderItem
+	Product -> Recipe
+	Ingredient -> Recipe
+
+	edge [ 
+		arrowhead = "none"
+		headlabel = "*"
+		taillabel = "0..1"
+	]
+	Order -> Pallet
+}

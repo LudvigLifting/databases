@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lab1</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {  background-color: #f8f8f8; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ef2929; } /* Alert */
+    code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #c4a000; } /* Attribute */
+    code span.bn { color: #0000cf; } /* BaseN */
+    code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4e9a06; } /* Char */
+    code span.cn { color: #000000; } /* Constant */
+    code span.co { color: #8f5902; font-style: italic; } /* Comment */
+    code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+    code span.dt { color: #204a87; } /* DataType */
+    code span.dv { color: #0000cf; } /* DecVal */
+    code span.er { color: #a40000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #0000cf; } /* Float */
+    code span.fu { color: #000000; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+    code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+    code span.ot { color: #8f5902; } /* Other */
+    code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+    code span.sc { color: #000000; } /* SpecialChar */
+    code span.ss { color: #4e9a06; } /* SpecialString */
+    code span.st { color: #4e9a06; } /* String */
+    code span.va { color: #000000; } /* Variable */
+    code span.vs { color: #4e9a06; } /* VerbatimString */
+    code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<!-- -*- mode: markdown; coding: utf-8; fill-column: 60; ispell-dictionary: "english" -*- -->
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<p><link rel="stylesheet" href="style.css"></p>
+<h1 id="edaf75---lab-1-sql">EDAF75 - lab 1: SQL</h1>
+<p><strong>Objective:</strong> to practice writing SQL queries.</p>
+<p>This lab is meant to be run as a <code>jupyter</code> notebook, you can download it <a href="lab1.zip">here</a> (the zip-file contains the notebook and the database, and a <a href="lab1.html">.html-file</a> which you can read in case you have problems reading/running jupyter notebooks).</p>
+<h2 id="background">Background</h2>
+<p>We have a database to handles the academic achievements of students at LTH – in it we have three tables:</p>
+<hr>
+<table rules="all">
+<tr>
+<th align="left">
+<code>students:</code>
+</th>
+<th>
+</th>
+</tr>
+<tr>
+<td>
+<code>ssn</code>
+</td>
+<td>
+social security number
+</td>
+</tr>
+<tr>
+<td>
+<code>first_name</code>
+</td>
+<td>
+first name (obviously!)
+</td>
+</tr>
+<tr>
+<td>
+<code>last_name</code>
+</td>
+<td>
+last name
+</td>
+</tr>
+</table>
+<hr>
+<table rules="all">
+<tr>
+<th align="left">
+<code>courses:</code>
+</th>
+<th>
+</th>
+</tr>
+<tr>
+<td>
+<code>course_code</code>
+</td>
+<td>
+course code, like <code>EDAF75</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>course_name</code>
+</td>
+<td>
+the name of the course, like “Database Technology”
+</td>
+</tr>
+<tr>
+<td>
+<code>level</code>
+</td>
+<td>
+the course level, like “G1”, “G2”, or “A”
+</td>
+</tr>
+<tr>
+<td>
+<code>credits</code>
+</td>
+<td>
+the number of credits for the course, like 7.5
+</td>
+</tr>
+</table>
+<hr>
+<table rules="all">
+<tr>
+<th align="left">
+<code>taken_courses:</code>
+</th>
+<th>
+</th>
+</tr>
+<tr>
+<td>
+<code>ssn</code>
+</td>
+<td>
+the social security number of a student
+</td>
+</tr>
+<tr>
+<td>
+<code>course_code</code>
+</td>
+<td>
+the course code for the course the student has taken
+</td>
+</tr>
+<tr>
+<td>
+<code>grade</code>
+</td>
+<td>
+the grade for the student passing the course
+</td>
+</tr>
+</table>
+<hr>
+<center>
+<img src="lab1.png">
+</center>
+<p>Some sample data:</p>
+<pre class="text"><code>ssn           first_name   last_name
+---           ----------   ---------
+861103–2438   Bo           Ek
+911212–1746   Eva          Alm
+950829–1848   Anna         Nyström
+...           ...          ...
+
+course_code   course_name                   level    credits
+-----------   -----------                   -----    -------
+EDA016        Programmeringsteknik          G1       7.5
+EDAA01        Programmeringsteknik - FK     G1       7.5
+EDA230        Optimerande kompilatorer      A        7.5
+...           ...                           ...      ...
+
+ssn           course_code   grade
+---           -----------   -----
+861103–2438   EDA016        4
+861103–2438   EDAA01        3
+911212–1746   EDA016        3
+...           ...           ...</code></pre>
+<p>The tables have been created with the following SQL statements:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> students (</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  ssn          <span class="dt">CHAR</span>(<span class="dv">11</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  first_name   TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  last_name    TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">PRIMARY</span> <span class="kw">KEY</span>  (ssn)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> courses (</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  course_code   <span class="dt">CHAR</span>(<span class="dv">6</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  course_name   TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">level</span>         <span class="dt">CHAR</span>(<span class="dv">2</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  credits       <span class="dt">DOUBLE</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">CHECK</span> (credits <span class="op">&gt;</span> <span class="dv">0</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">PRIMARY</span> <span class="kw">KEY</span>   (course_code)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> taken_courses (</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  ssn           <span class="dt">CHAR</span>(<span class="dv">11</span>),</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  course_code   <span class="dt">CHAR</span>(<span class="dv">6</span>),</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  grade         <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">CHECK</span> (grade <span class="op">&gt;=</span> <span class="dv">3</span> <span class="kw">AND</span> grade <span class="op">&lt;=</span> <span class="dv">5</span>),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">PRIMARY</span> <span class="kw">KEY</span>   (ssn, course_code),</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FOREIGN</span> <span class="kw">KEY</span>   (ssn) <span class="kw">REFERENCES</span> students(ssn),</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FOREIGN</span> <span class="kw">KEY</span>   (course_code) <span class="kw">REFERENCES</span> courses(course_code)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<p>All courses offered at the “Computer Science and Engineering” program at LTH during the academic year 2013/14 are in the table ’courses`. Also, the database has been filled with made up data. SQL statements like the following have been used to insert the data:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INTO</span>   students(ssn, first_name, last_name)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span> (<span class="st">&#39;950705-2308&#39;</span>, <span class="st">&#39;Anna&#39;</span>, <span class="st">&#39;Johansson&#39;</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       (<span class="st">&#39;930702-3582&#39;</span>, <span class="st">&#39;Anna&#39;</span>, <span class="st">&#39;Johansson&#39;</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>       (<span class="st">&#39;911212-1746&#39;</span>, <span class="st">&#39;Eva&#39;</span>, <span class="st">&#39;Alm&#39;</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>       (<span class="st">&#39;910707-3787&#39;</span>, <span class="st">&#39;Eva&#39;</span>, <span class="st">&#39;Nilsson&#39;</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>       <span class="op">..</span>.</span></code></pre></div>
+<h2 id="assignments">Assignments</h2>
+<p>As said above, this lab is designed to be run as a jupyter notebook. If you haven’t got jupyter running, you can run the sql-commands for the problems below interactively inside sqlite3, or as a script file with all your commands, or inside some IDE, like <a href="https://sqlitebrowser.org/">DB Browser for SQLite</a>.</p>
+<p>If you’re running the lab as a notebook (and hopefully you are!), evaluate the following cells before you begin:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python input"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext sql</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python input"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>sql sqlite:<span class="op">///</span>lab1.sqlite</span></code></pre></div>
+<p>The tables <code>students</code>, <code>courses</code> and <code>taken_courses</code> are already in your database, you can see some of their contents by running the cells below:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python input"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>SELECT  <span class="op">*</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>FROM    students</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>LIMIT   <span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python input"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>SELECT  <span class="op">*</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>FROM    courses</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>LIMIT   <span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python input"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>SELECT  <span class="op">*</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>FROM    taken_courses</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>LIMIT   <span class="dv">4</span></span></code></pre></div>
+<p>If you inadvertently change the contents of the tables, you can always recreate the them with the following command (it must be run at the command line):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> lab1.sqlite <span class="op">&lt;</span> create-lab1-data.sql</span></code></pre></div>
+<p>After some of the questions there is a number in brackets. This is the number of rows generated by the question. For instance, [72] after question a) means that there are 72 students in the database, you can use that number as an indicatation of if your answer is in the right ballpark.</p>
+<ol type="a">
+<li>What are the names (first name, last name) of all the students? [72]</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python input"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="2" type="a">
+<li>Same as question a) but produce a sorted listing. Sort first by last name and then by first name.</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="3" type="a">
+<li>What are the names of the students who were born in 1985? [4]</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="4" type="a">
+<li>The next-to-last digit in the social security number is even for females, and odd for males. List the first names of all female students in our database alphabetically (each name should occur only once). Hint: the <code>substr</code> function can be useful. [26]</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="5" type="a">
+<li>How many students are registered in the database?</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="6" type="a">
+<li>Which courses are offered by the department of Mathematics (their course codes have the form <code>FMAxxx</code>)? [22]</li>
+</ol>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="7" type="a">
+<li>Which courses give more than 7.5 credits? [16]</li>
+</ol>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="8" type="a">
+<li>How may courses are there for each level (<code>G1</code>, <code>G2</code>, and <code>A</code>)?</li>
+</ol>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<p>In the next few problems, we’ll look at the results of the student with the social security number 910101–1234 – to make things a lot easier, you can create a <code>VIEW</code> with all his results (see lecture 3).</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>DROP VIEW IF EXISTS ...<span class="op">;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>CREATE VIEW ... AS</span></code></pre></div>
+<ol type="i">
+<li>Which courses (course codes only) have been taken by the student with the social security number 910101–1234? [35]</li>
+</ol>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="10" type="a">
+<li>What are the names of these courses, and how many credits do they give?</li>
+</ol>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="11" type="a">
+<li>How many credits has the student taken?</li>
+</ol>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="12" type="a">
+<li>Which is the student’s grade average? Try to calculate both the unweighted and the weighted average.</li>
+</ol>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="13" type="a">
+<li>Which students have taken 0 credits? [11] This problem can be solved in several ways, first do it with an outer join:</li>
+</ol>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<p>Now do the same thing using a subquery:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="14" type="a">
+<li>List the names and average grades of the 10 students with the highest grade average? You can use the unweighted average.</li>
+</ol>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="15" type="a">
+<li><p>List the social security number and total number of credits for all students. Students with no credits should be included in the listing, with 0 credits (not <code>NULL</code>).</p>
+<p>If you do this with an outer join (and I recommend you try it!) you might want to use the function <code>coalesce(v1, v2, ...)</code>; it returns the first value which is not <code>NULL</code>, so <code>coalesce(avg(grade), 0)</code> would give 0 if the were no grades (i.e., if <code>grade</code> were <code>NULL</code>), you can also try the <code>ifnull</code> function.</p>
+<p>(It may be a little bit tricky to get this query right, if you’re missing the students with 0 credits, don’t worry, your TA will help you get it right). [72]</p></li>
+</ol>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="16" type="a">
+<li><p>Is there more than one student with the same name? If so, who are these students and what are their social security numbers? [7]</p>
+<p>As usual there are several ways of solving this, try to solve it using a <code>WITH</code>-statement where you create a table with all duplicate names, and then use it in a <code>JOIN</code>:</p></li>
+</ol>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+<ol start="17" type="a">
+<li>What 5 courses have the highest grade average?</li>
+</ol>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python input clear"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sql</span></code></pre></div>
+</body>
+</html>
